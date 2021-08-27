@@ -19,6 +19,9 @@
             <v-col cols="12" md="3" align="center">
                 <v-btn @click="signUp" elevation="2" outlined> Sign Up</v-btn>
             </v-col>
+            <v-row>
+                <v-img></v-img>
+            </v-row>
         </v-container>
     </v-app>
 </template>

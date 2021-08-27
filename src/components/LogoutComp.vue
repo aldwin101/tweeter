@@ -15,7 +15,7 @@
             cookies.remove('userLoggedinId');
             this.$router.push({name: 'LoginSignup'});
             }
-        }
+        },
     }
 </script>
 

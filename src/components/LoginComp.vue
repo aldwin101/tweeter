@@ -50,8 +50,9 @@
                 }).then((response) => {
                     cookies.set('token', response.data.loginToken);
                     cookies.set('userLoggedinId', response.data.userId)
-                    this.$router.push({name: 'Profile'});
+                    this.$router.push({name: 'Feed'});
                     console.log(response.data.loginToken);
+                    console.log(response.data);
                 }).catch ((error) => {
                     console.log(error);
                 })

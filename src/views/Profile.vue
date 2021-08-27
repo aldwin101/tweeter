@@ -23,17 +23,23 @@
       <v-text-field v-model="bannerUrl" label="Banner"></v-text-field>
     </v-col>
     <v-col>
-      <v-btn>Save profile</v-btn>
+      <v-btn @click="updateProfile">Save profile</v-btn>
     </v-col>
   </div>
 </template>
 
 <script>
 import LogoutComp from '../components/LogoutComp.vue'
+import axios from 'axios'
+import cookies from 'vue-cookies'
   export default {
     name: 'Profile',
+    components: {
+      LogoutComp
+    },
     data() {
       return {
+        token: '',
         email: '',
         username: '',
         bio: '',
@@ -42,16 +48,39 @@ import LogoutComp from '../components/LogoutComp.vue'
         bannerUrl: ''
       }
     },
-    components: {
-      LogoutComp
-    },
     methods: {
-      saveProfile(){
-        this.$router.push({name: 'Feed'});
+      updateProfile() {
+          axios.request({
+          url : 'https://tweeterest.ml/api/users',
+          method : 'PATCH',
+          headers : {
+            'Content-Type': 'application/json',
+            'X-Api-Key' : process.env.VUE_APP_API_KEY
+          },
+          data: {
+            'loginToken': this.token,
+            'email': this.email,
+            'username': this.username,
+            'bio': this.bio,
+            'birthdate': this.birthdate,
+            'imageUrl': this.imageUrl,
+            'bannerUrl': this.bannerUrl
+          }
+        }).then((response) => {
+          // this.$router.push({name: 'Feed'});
+          console.log(response.data);
+
+        }).catch((error) => {
+          console.log(error.response);
+        })
       },
       closeEditProfile(){
         this.$router.push({name: 'Feed'});
       }
+    },
+    mounted () {
+      this.token = cookies.get('token');
+      console.log(this.token);
     },
   }
 </script>
