@@ -1,6 +1,7 @@
 <template>
   <div>
     <LogoutComp />
+  <v-container>
     <v-col>
       <v-btn @click="closeEditProfile">X</v-btn>
     </v-col>
@@ -22,9 +23,13 @@
     <v-col cols="12" md="3">
       <v-text-field v-model="bannerUrl" label="Banner"></v-text-field>
     </v-col>
-    <v-col>
-      <v-btn @click="updateProfile">Save profile</v-btn>
-    </v-col>
+    
+    <v-row>
+      <v-col>
+        <v-btn @click="updateProfile">Save profile</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
   </div>
 </template>
 
@@ -45,7 +50,8 @@ import cookies from 'vue-cookies'
         bio: '',
         birthdate: '',
         imageUrl: '',
-        bannerUrl: ''
+        bannerUrl: '',
+        password: ''
       }
     },
     methods: {
@@ -67,9 +73,28 @@ import cookies from 'vue-cookies'
             'bannerUrl': this.bannerUrl
           }
         }).then((response) => {
-          // this.$router.push({name: 'Feed'});
+          this.$router.push({name: 'Feed'});
           console.log(response.data);
 
+        }).catch((error) => {
+          console.log(error.response);
+        })
+      },
+      
+      deleteProfile() {
+        axios.request({
+          url : 'https://tweeterest.ml/api/users',
+          method : 'DELETE',
+          headers : {
+            'Content-Type': 'application/json',
+            'X-Api-Key' : process.env.VUE_APP_API_KEY,
+          },
+          data: {
+            'password' : this.password,
+            'loginToken' : this.token
+          }
+        }).then((response) => {
+          console.log(response);
         }).catch((error) => {
           console.log(error.response);
         })
