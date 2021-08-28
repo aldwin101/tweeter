@@ -7,8 +7,42 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import cookies from 'vue-cookies'
     export default {
-        
+        name: 'DeleteProfileComp',
+        data() {
+            return {
+                password: '',
+                token:''
+            }
+        },
+        methods: {
+            deleteProfile() {
+                axios.request({
+                    url : 'https://tweeterest.ml/api/users',
+                    method : 'DELETE',
+                    headers : {
+                        'Content-Type': 'application/json',
+                        'X-Api-Key' : process.env.VUE_APP_API_KEY,
+                    },
+                    data: {
+                        'loginToken' : this.token,
+                        'password' : this.password
+                    }
+                    }).then((response) => {
+                        if(this.password === response.data.password){
+                            console.log(response);
+                        }
+                    }).catch((error) => {
+                    console.log(error.response);
+                })
+            },
+        },
+        mounted () {
+            this.token = cookies.get('token');
+            console.log(this.token);
+        },
     }
 </script>
 

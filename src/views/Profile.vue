@@ -24,12 +24,11 @@
       <v-text-field v-model="bannerUrl" label="Banner"></v-text-field>
     </v-col>
     
-    <v-row>
       <v-col>
         <v-btn @click="updateProfile">Save profile</v-btn>
       </v-col>
-    </v-row>
   </v-container>
+    <DeleteProfileComp />
   </div>
 </template>
 
@@ -37,10 +36,12 @@
 import LogoutComp from '../components/LogoutComp.vue'
 import axios from 'axios'
 import cookies from 'vue-cookies'
+import DeleteProfileComp from '../components/DeleteProfileComp.vue'
   export default {
     name: 'Profile',
     components: {
-      LogoutComp
+      LogoutComp,
+        DeleteProfileComp
     },
     data() {
       return {
@@ -51,7 +52,6 @@ import cookies from 'vue-cookies'
         birthdate: '',
         imageUrl: '',
         bannerUrl: '',
-        password: ''
       }
     },
     methods: {
@@ -76,25 +76,6 @@ import cookies from 'vue-cookies'
           this.$router.push({name: 'Feed'});
           console.log(response.data);
 
-        }).catch((error) => {
-          console.log(error.response);
-        })
-      },
-      
-      deleteProfile() {
-        axios.request({
-          url : 'https://tweeterest.ml/api/users',
-          method : 'DELETE',
-          headers : {
-            'Content-Type': 'application/json',
-            'X-Api-Key' : process.env.VUE_APP_API_KEY,
-          },
-          data: {
-            'password' : this.password,
-            'loginToken' : this.token
-          }
-        }).then((response) => {
-          console.log(response);
         }).catch((error) => {
           console.log(error.response);
         })
