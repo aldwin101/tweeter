@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- vuetify text field and button -->
         <v-container>
         <v-row>
             <v-col><v-text-field v-model="userId" placeholder="Enter user id"></v-text-field></v-col>
@@ -19,7 +20,7 @@
             }
         },
         methods: {
-            // Search user
+            // Search user function
             findUser() {
                 axios.request({
                     url: 'https://tweeterest.ml/api/users',
@@ -32,9 +33,10 @@
                         userId: this.userId,
                     }
                 }).then((response) => {
+                    this.$router.push({name: 'UserProfile', params:{userId: this.userId}}).catch(()=>{});
                     console.log(response.data);
                 }).catch((error) => {
-                    console.log(error.response);
+                    console.log(error);
                 })
             },
         },

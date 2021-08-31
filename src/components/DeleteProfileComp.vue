@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div> 
+        <!-- vuetify button -->
         <v-col>
             <v-btn @click="deleteProfile">Delete Profile</v-btn>
         </v-col>
@@ -18,6 +19,7 @@
             }
         },
         methods: {
+            // delete profile
             deleteProfile() {
                 axios.request({
                     url : 'https://tweeterest.ml/api/users',
@@ -40,6 +42,7 @@
             },
         },
         mounted () {
+            // Getting token
             this.token = cookies.get('token');
             console.log(this.token);
         },

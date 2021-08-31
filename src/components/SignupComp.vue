@@ -1,4 +1,5 @@
 <template>
+<!-- vuetify button and text field -->
     <v-app>
         <v-container>
             <v-col cols="12" md="3">
@@ -49,6 +50,7 @@
             }
         },
         methods: {
+            //
             signUp(){
                 axios.request({
                     url: 'https://tweeterest.ml/api/users',

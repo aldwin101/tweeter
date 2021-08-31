@@ -1,5 +1,5 @@
 <template>
-    <!-- vue textfield and button-->
+    <!-- vuetify textfield and button-->
     <v-app>
         <v-container>
             <v-col cols="12" md="3">
@@ -24,6 +24,7 @@
             return {
                 email: "",
                 password: "",
+                // button and textfield rules
                 valid: false,
                 emailRules: [
                     v => !!v || 'E-mail is required',
@@ -36,6 +37,7 @@
             }
         },
         methods: {
+            // AXIOS POST method call for log in
             logIn(){
                 axios.request({
                     url: 'https://tweeterest.ml/api/login',
