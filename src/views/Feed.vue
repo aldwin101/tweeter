@@ -1,63 +1,36 @@
 <template>
     <div>
-        
-        <v-container>
-            <v-row>
-                <v-col><v-btn @click="discoverPage">Discover</v-btn></v-col>
-            </v-row>
-            <SearchUser />
-            <v-row>
-            <v-textarea v-model="content" name="input-7-4" label="What's on your mind?"></v-textarea>
-            </v-row>
-            <v-row>
-                <v-col><v-btn @click="postTweet" >Post</v-btn></v-col>
-            
-                <v-col><v-btn @click="editProfile">Edit Profile</v-btn></v-col>
-            </v-row>
-            {{showPost}}
-        </v-container>
+        <div id="gridContainer">
+            <div>
+                <UserTweet />
+            </div>
+            <div id="sideBtns">
+                <v-container>
+                    <v-row>
+                        <v-col><v-btn @click="discoverPage">Discover</v-btn></v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col><v-btn @click="editProfile">Edit Profile</v-btn></v-col>
+                    </v-row>
+                </v-container>
+            </div>
+            <div>
+                <FollowedUserTweets />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import SearchUser from '../components/SearchUser.vue'
-    import axios from 'axios'
-    import cookies from 'vue-cookies'
+    import FollowedUserTweets from '../components/FollowedUserTweets.vue'
+    import UserTweet from '../components/UserTweet.vue'
     export default {
         name:'Feed',
         components: {
-            SearchUser,
-        },
-        data() {
-            return {
-                content: '',
-                token: '',
-                imageUrl: '',
-                showPost: ''
-            }
+            UserTweet,
+            FollowedUserTweets
         },
         methods: {
-            postTweet(){
-                axios.request({
-                    url : 'https://tweeterest.ml/api/tweets',
-                    method : 'POST',
-                    headers : {
-                        'Content-Type': 'application/json',
-                        'X-Api-Key' : process.env.VUE_APP_API_KEY
-                    },
-                    data: {
-                        'content': this.content,
-                        'loginToken': this.token,
-                        'imageUrl': this.imageUrl
-                    }
-                }).then((response) => {
-                    this.showPost = response.data.content;
-                    cookies.set('showPost', response.data.content)
-                    console.log(response.data);
-                }).catch((error) => {
-                    console.log(error.response);
-                })
-            },
             discoverPage(){
                 this.$router.push({name: 'Discover'});
             },
@@ -66,14 +39,19 @@ import SearchUser from '../components/SearchUser.vue'
                 this.$router.push({name: 'Profile'});
             }
         },
-        mounted () {
-            this.token = cookies.get('token');
-            this.showPost = cookies.get('showPost');
-            console.log(this.token);
-        }
     }
 </script>
 
 <style scoped>
-
+#gridContainer {
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    grid-template-rows: fit-content(100%) 1fr;
+}
+#sideBtns {
+    grid-row: 1 / 3;
+    position: relative;
+    top: 50vh;
+    width: 15vw;
+    }
 </style>

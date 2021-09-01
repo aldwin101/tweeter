@@ -1,5 +1,8 @@
+<!-- This component goes into the FollowedUserTweets in components folder -->
+
 <template>
-    <div id="tweetContainer">
+    <div>
+        <div id="tweetContainer">
         <div id='userTweets'>
             <h2>{{username}}</h2>
             <p>{{created}}</p>
@@ -10,18 +13,20 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
     export default {
-        name: 'TweetComp',
+        name : 'FollowedUser',
         props: {
-                username: String,
-                tweets: String,
-                created: String,
-                imageUrl: String
-            }
-        }
+            username: String,
+            tweets: String,
+            created: String,
+            imageUrl: String
+        },
+    }
+    
 </script>
 
 <style scoped>
@@ -61,6 +66,4 @@ p {
     background-color: rgb(235, 235, 235);
     margin-left: 1vw;
 }
-
-
 </style>
