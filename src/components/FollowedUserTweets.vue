@@ -5,7 +5,8 @@
         <FollowedUserComp v-for='tweet in tweets' :key='tweet.tweetId' 
         :username='tweet.username'
         :tweets='tweet.content'
-        :created='tweet.createdAt' />
+        :created='tweet.createdAt' 
+        :tweetId="tweet.tweetId"/>
     </div>
 </template>
 
@@ -54,6 +55,7 @@ import FollowedUserComp from './FollowedUserComp.vue'
                             userId: followedId
                         }
                     }).then((response) => {
+                        // joining multiple arrays
                         this.tweets = this.tweets.concat(response.data);
                         console.log(response.data);
                     }).catch((error) => {

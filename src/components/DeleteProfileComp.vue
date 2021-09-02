@@ -12,12 +12,6 @@
     import cookies from 'vue-cookies'
     export default {
         name: 'DeleteProfileComp',
-        data() {
-            return {
-                password: '',
-                token:''
-            }
-        },
         methods: {
             // delete profile
             deleteProfile() {
@@ -33,9 +27,7 @@
                         'password' : this.password
                     }
                     }).then((response) => {
-                        if(this.password === response.data.password){
-                            console.log(response);
-                        }
+                        console.log(response);
                     }).catch((error) => {
                     console.log(error.response);
                 })

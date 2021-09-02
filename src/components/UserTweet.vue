@@ -9,8 +9,6 @@
                     <v-col><v-btn @click="postTweet" >Post</v-btn></v-col>
                 </v-row>
             </v-container>
-            <div id="userPostedTweet">
-            </div>
         </div>
     </div>
 </template>
@@ -26,6 +24,7 @@
             }
         },
         methods: {
+            // user post/upload tweet
             postTweet(){
                 axios.request({
                     url : 'https://tweeterest.ml/api/tweets',
@@ -40,7 +39,6 @@
                     }
                 }).then((response) => {
                     this.showPost = response.data.content;
-                    cookies.set('showPost', response.data.content)
                     console.log(response.data);
                 }).catch((error) => {
                     console.log(error.response);
@@ -48,6 +46,7 @@
             },
         },
         mounted () {
+            // get token on page load
             this.token = cookies.get('token');
             console.log(this.token);
         }

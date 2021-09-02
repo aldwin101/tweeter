@@ -1,5 +1,4 @@
 <!-- This component goes into the FollowedUserTweets in components folder -->
-
 <template>
     <div>
         <div id="tweetContainer">
@@ -8,7 +7,8 @@
             <p>{{created}}</p>
             <h3>{{tweets}}</h3>
             <div id="likeCommentContainer">
-                <p>like</p>
+                <p @click="likeComment">Like</p>
+                <p @click="unlikeComment">Unlike</p>
                 <p>comment</p>
             </div>
         </div>
@@ -17,14 +17,65 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import cookies from 'vue-cookies'
     export default {
         name : 'FollowedUser',
         props: {
             username: String,
             tweets: String,
             created: String,
-            imageUrl: String
+            imageUrl: String,
+            tweetId: Number //assigned a prop for the tweetId to get the value of the tweetId
         },
+        data() {
+            return {
+                getTweetId: this.tweetId
+            }
+        },
+        methods: {
+            likeComment(){
+                axios.request({
+                url:'https://tweeterest.ml/api/tweet-likes',
+                method:'POST',
+                headers: {
+                'content-type': 'application/json',
+                'X-Api-Key' : process.env.VUE_APP_API_KEY
+                },
+                data: {
+                    'loginToken': this.token,
+                    'tweetId' : this.getTweetId
+                }
+            }).then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error.response);
+            })
+            },
+            
+            unlikeComment() {
+                axios.request({
+                    url: 'https://tweeterest.ml/api/tweet-likes',
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Api-Key' : process.env.VUE_APP_API_KEY
+                    },
+                    data: {
+                        'loginToken': this.token,
+                        'tweetId': this.getTweetId
+                    }
+                }).then((response) => {
+                    console.log(response + ' Unliked');
+                }).catch((error) => {
+                    console.log(error.response);
+                })
+            }
+        },
+        mounted () {
+            this.token = cookies.get('token');
+            console.log(this.tweetId);
+        }
     }
     
 </script>

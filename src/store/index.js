@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import cookies from 'vue-cookies'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,7 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
-    TweetCommentLike(){
+    likeComment(){
       axios.request({
         url:'https://tweeterest.ml/api/tweet-likes',
         method:'POST',
@@ -25,11 +26,13 @@ export default new Vuex.Store({
       }).then((response) => {
         console.log(response);
       }).catch((error) => {
-        console.log(error);
+        console.log(error.response);
       })
     }
   },
   getters: {
-    
+    getToken(){
+      cookies.get('token')
+    }
   }
 })

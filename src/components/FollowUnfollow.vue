@@ -62,6 +62,7 @@
         },
         mounted () {
             this.token = cookies.get('token');
+            console.log(this.userId);
         }
     }
 </script>
