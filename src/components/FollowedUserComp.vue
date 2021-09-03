@@ -9,6 +9,7 @@
             <div id="likeCommentContainer">
                 <p @click="likeComment">Like</p>
                 <p @click="unlikeComment">Unlike</p>
+                
                 <UserComments :tweetId="tweetId"/>
                 <CommentList :tweetId="tweetId"/>
             </div>

@@ -1,3 +1,4 @@
+<!-- This component goes into the CommentList in components folder -->
 <template>
 <div id="container">
     <div id="content">
@@ -23,14 +24,15 @@
             username: String,
             comment: String,
             created: String,
-            getCommentId: Number
+            getCommentId: Number // assign props to get the value of the commentId in CommentList component
         },
         data() {
             return {
-                commentId: this.getCommentId
+                commentId: this.getCommentId 
             }
         },
         methods: {
+                // like comment
             likeComment() {
                 axios.request({
                     url:'https://tweeterest.ml/api/comment-likes',
@@ -68,7 +70,7 @@
                     console.log(error);
                 })
             },
-
+                // delete comment
             deleteComment() {
                 axios.request({
                     url:'https://tweeterest.ml/api/comments',
