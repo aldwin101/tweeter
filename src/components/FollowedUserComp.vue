@@ -9,7 +9,8 @@
             <div id="likeCommentContainer">
                 <p @click="likeComment">Like</p>
                 <p @click="unlikeComment">Unlike</p>
-                <p>comment</p>
+                <UserComments :tweetId="tweetId"/>
+                <CommentList :tweetId="tweetId"/>
             </div>
         </div>
     </div>
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+    import CommentList from './CommentList.vue'
+    import UserComments from './UserComments.vue'
     import axios from 'axios'
     import cookies from 'vue-cookies'
     export default {
@@ -33,13 +36,17 @@
                 getTweetId: this.tweetId
             }
         },
+        components: {
+            CommentList,
+            UserComments
+        },
         methods: {
             likeComment(){
                 axios.request({
                 url:'https://tweeterest.ml/api/tweet-likes',
                 method:'POST',
                 headers: {
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
                 'X-Api-Key' : process.env.VUE_APP_API_KEY
                 },
                 data: {
