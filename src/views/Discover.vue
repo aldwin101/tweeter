@@ -1,13 +1,25 @@
 <template>
     <div>
-        
+        <DiscoverComp v-for="tweet in tweets" :key="tweet.tweetId"
+        :username="tweet.username"
+        :createdAt="tweet.createdAt"
+        :content="tweet.content "/>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
+    import DiscoverComp from '../components/DiscoverComp.vue'
     export default {
         name: 'Discover',
+        components: { 
+            DiscoverComp 
+        },
+        data() {
+            return {
+                tweets: []
+            }
+        },
         methods: {
             displayTweets(){
                 axios.request({
@@ -20,6 +32,7 @@
                     
                     
                 }).then((response) => {
+                    this.tweets = response.data;
                     console.log(response);
                 }).catch((error) => {
                     console.log(error);

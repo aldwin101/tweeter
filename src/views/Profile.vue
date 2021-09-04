@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import LogoutComp from '../components/LogoutComp.vue'
 import axios from 'axios'
 import cookies from 'vue-cookies'
 import DeleteProfileComp from '../components/DeleteProfileComp.vue'
+import LogoutComp from '../components/LogoutComp.vue'
   export default {
     name: 'Profile',
     components: {

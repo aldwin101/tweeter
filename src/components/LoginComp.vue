@@ -1,18 +1,20 @@
 <template>
-    <!-- vuetify textfield and button-->
-    <v-app>
-        <v-container>
-            <v-col cols="12" md="3">
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-            </v-col>
-            <v-col cols="12" md="3">
-                <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" @click:append="show1 = !show1"></v-text-field>
-            </v-col>
-            <v-col cols="12" md="3" align="center">
-                <v-btn @click="logIn" elevation="2" outlined >Log in</v-btn>
-            </v-col>
-        </v-container>
-    </v-app>
+    <div>
+        <!-- vuetify textfield and button-->
+        <v-app>
+            <v-container>
+                <v-col cols="12" md="3">
+                    <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                </v-col>
+                <v-col cols="12" md="3">
+                    <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" @click:append="show1 = !show1"></v-text-field>
+                </v-col>
+                <v-col cols="12" md="3" align="center">
+                    <v-btn @click="logIn" elevation="2" outlined >Log in</v-btn>
+                </v-col>
+            </v-container>
+        </v-app>
+    </div>
 </template>
 
 <script>
@@ -20,6 +22,8 @@
     import cookies from 'vue-cookies'
     export default {
         name : 'LoginComp',
+        components: {
+        },
         data: () => {
             return {
                 email: "",
