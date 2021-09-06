@@ -1,20 +1,29 @@
+<!-- This component goes into the Profile.vue in view folder -->
 <template>
     <div> 
         <!-- vuetify button -->
         <v-col>
             <v-btn @click="deleteProfile">Delete Profile</v-btn>
         </v-col>
+
+        <div id="confirmPassword">
+            <v-text-field v-model="password" placeholder="Confirm Password" type="password"></v-text-field>
+        </div>
     </div>
 </template>
 
 <script>
+
     import axios from 'axios'
     import cookies from 'vue-cookies'
     export default {
         name: 'DeleteProfileComp',
-        props: {
-            password: String
+        data() {
+            return {
+                password: ''
+            }
         },
+        
         methods: {
             // delete profile
             deleteProfile() {
@@ -30,18 +39,19 @@
                         'password' : this.password
                     }
                     }).then((response) => {
-
-                        console.log(response.data.password);
+                        this.$router.push({name: 'LoginSignup'})
+                        console.log(response);
                     }).catch((error) => {
                     console.log(error.response);
                 })
             },
         },
         mounted () {
-            // Getting token
+            // Get token
             this.token = cookies.get('token');
             console.log(this.token);
         },
+        
     }
 </script>
 

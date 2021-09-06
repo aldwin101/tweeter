@@ -16,6 +16,6 @@ import LoginComp from '../components/LoginComp.vue'
 
 <style scoped>
     div {
-        background-color: rgb(149, 173, 173);
+        background-color: #F19953;
     }
 </style>

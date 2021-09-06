@@ -1,12 +1,19 @@
 <template>
   <div>
-    <h1>Tweeter.</h1>
-    <v-col>
-      <v-btn @click="logIn">Log In</v-btn>
-    </v-col>
-    <v-col>
-      <v-btn @click="SignUp">Sign Up</v-btn>
-    </v-col>
+    <v-app>
+      <v-container>
+        <div id="h1Container">
+          <h1>Tweeter.</h1>
+        </div>
+        <v-col>
+          <v-btn class="orange white--text" rounded @click="logIn">Log In</v-btn>
+        </v-col>
+        <v-col>
+          <v-btn class="orange white--text" rounded @click="SignUp">Sign Up</v-btn>
+        </v-col>
+      </v-container>
+    </v-app>
+    
   </div>
 </template>
 
@@ -29,13 +36,27 @@
 
 <style>
     div {
-      background-color: rgb(149, 173, 173);
       text-align: center;
-      color: rgb(80, 67, 199);
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
-    h1 {
-      font-size: 20vh;
+    #h1Container{
       padding: 25vh 0 0 0;
+      
+      width: 60vw;
+      margin: auto;
     }
+    h1 {
+      font-size: 10vw;
+      background-color: #F19953;
+      border-radius: 15vw 0 15vw 0;
+      color: white;
+    }
+    /* Tablet */
+  @media only screen and (min-width: 426px) {
+
+  }
+    /* Desktop */
+  @media only screen and (min-width: 769px) {
+
+  }
 </style>

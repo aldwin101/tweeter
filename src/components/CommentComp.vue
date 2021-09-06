@@ -1,4 +1,4 @@
-<!-- This component goes into the CommentList in components folder -->
+<!-- This component goes into the CommentList.vue in components folder -->
 <template>
 <div id="container">
     <div id="content">
@@ -91,6 +91,7 @@
             }
         },
         mounted () {
+                // get token
             this.token = cookies.get('token');
         },
     }

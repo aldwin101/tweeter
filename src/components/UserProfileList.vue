@@ -8,7 +8,7 @@
         :bio="profile.bio"
         :bannerUrl="profile.bannerUrl" />
         <div>
-            <!-- getting the userId -->
+            <!-- passing the userId -->
             <FollowUnfollow :userId="this.$route.params.userId"/>
         </div>
     </div>

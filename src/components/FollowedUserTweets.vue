@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import FollowedUserComp from './FollowedUserComp.vue'
+    import FollowedUserComp from './FollowedUserComp.vue'
     import axios from 'axios'
     import cookies from 'vue-cookies'
     export default {
@@ -56,7 +56,7 @@ import FollowedUserComp from './FollowedUserComp.vue'
                         }
                     }).then((response) => {
                         // joining multiple arrays
-                        this.tweets = this.tweets.concat(response.data);
+                        this.tweets = this.tweets.concat(response.data.reverse());
                         console.log(response.data);
                     }).catch((error) => {
                         console.log(error.response);

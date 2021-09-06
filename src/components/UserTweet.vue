@@ -1,14 +1,21 @@
+
 <template>
     <div>
         <div id="container">
-            <v-container>
-                <v-row>
-                <v-textarea v-model="content" name="input-7-4" placeholder="What's on your mind?"></v-textarea>
-                </v-row>
-                <v-row>
-                    <v-col><v-btn @click="postTweet" >Post</v-btn></v-col>
-                </v-row>
-            </v-container>
+            <v-app>
+                <v-container>
+                    <v-row>
+                        <div class="imgContainer">
+                            <img src="@/assets/defaultProfilePic.png" alt="user_profile-pic">
+                        </div>
+
+                        <v-col>
+                            <v-textarea  v-model="content" placeholder="What's on your mind?"></v-textarea>
+                            <v-btn class="orange white--text" rounded @click="postTweet" >Post</v-btn>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-app>
         </div>
     </div>
 </template>
@@ -38,12 +45,12 @@
                         'loginToken': this.token,
                     }
                 }).then((response) => {
-                    this.showPost = response.data.content;
                     console.log(response.data);
                 }).catch((error) => {
                     console.log(error.response);
                 })
             },
+            
         },
         mounted () {
             // get token on page load
@@ -54,8 +61,84 @@
 </script>
 
 <style scoped>
-#container {
-    width: 50vw;
-    margin: auto;
-}
+    /* mobile */
+    @media only screen and (max-width: 600px) {
+        ::v-deep .v-application--wrap {
+            min-height: fit-content;
+        }
+
+        ::v-deep .imgContainer {
+        position: relative;
+        top: 5vh;
+        width: 20vw;
+        height: 20vw;
+        overflow: hidden;
+        border-radius: 50%;
+        border-color: rgb(161, 157, 157);
+        border-style: solid;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #container {
+            width: 90vw;
+        }
+    }
+    /* tablet */
+    @media only screen and (min-width: 600px) {
+        ::v-deep .v-application--wrap {
+        min-height: fit-content;
+    }
+
+    ::v-deep .imgContainer {
+        position: relative;
+        top: 5vh;
+        width: 15vw;
+        height: 15vw;
+        overflow: hidden;
+        border-radius: 50%;
+        border-color: rgb(161, 157, 157);
+        border-style: solid;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #container {
+            width: 70vw;
+            margin: auto;
+        }
+    }
+    /* desktop */
+    @media only screen and (min-width: 820px) {
+        ::v-deep .v-application--wrap {
+        min-height: fit-content;
+        }
+
+        ::v-deep .imgContainer {
+            position: relative;
+            top: 5vh;
+            width: 10vw;
+            height: 10vw;
+            overflow: hidden;
+            border-radius: 50%;
+            border-color: rgb(161, 157, 157);
+            border-style: solid;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #container {
+            width: 70vw;
+            margin: auto;
+        }
+        .v-textarea {
+            font-size: 1.5vw;
+        }
+    }
 </style>

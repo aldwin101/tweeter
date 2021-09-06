@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LogoutComp />
+    <SideButtons />
   <v-container>
     <v-col>
       <v-btn @click="closeEditProfile">X</v-btn>
@@ -36,11 +36,11 @@
 import axios from 'axios'
 import cookies from 'vue-cookies'
 import DeleteProfileComp from '../components/DeleteProfileComp.vue'
-import LogoutComp from '../components/LogoutComp.vue'
+import SideButtons from '../components/SideButtons.vue'
   export default {
     name: 'Profile',
     components: {
-      LogoutComp,
+      SideButtons,
         DeleteProfileComp
     },
     data() {

@@ -32,7 +32,7 @@
                     
                     
                 }).then((response) => {
-                    this.tweets = response.data;
+                    this.tweets = response.data.reverse();
                     console.log(response);
                 }).catch((error) => {
                     console.log(error);

@@ -2,7 +2,7 @@
     <div>
         <v-text-field
             v-model="content"
-            label="Solo"
+            placeholder="Write comment"
             solo
             dense
           ></v-text-field>

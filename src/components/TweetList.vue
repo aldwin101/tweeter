@@ -35,7 +35,7 @@
                         userId: this.userId,
                     }
                 }).then((response) => {
-                    this.tweets = response.data
+                    this.tweets = response.data.reverse();
                     console.log(response.data);
                 }).catch((error) => {
                     console.log(error.response);

@@ -1,3 +1,4 @@
+<!-- This component goes into the FollowedUserComp.vue in components folder -->
 <template>
     <div>
         <CommentComp v-for="comment in comments" :key="comment.commentId"
@@ -27,6 +28,7 @@ import CommentComp from './CommentComp.vue'
             }
         },
         mounted () {
+            // Get all comments on page load
                 axios.request({
                 url: 'https://tweeterest.ml/api/comments',
                 method: 'GET',

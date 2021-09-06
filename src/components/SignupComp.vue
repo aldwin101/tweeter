@@ -1,30 +1,37 @@
 <template>
 <!-- vuetify button and text field -->
-    <v-app>
-        <v-container>
-            <v-col cols="12" md="3">
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-            </v-col>
-            <v-col cols="12" md="3">
-                <v-text-field v-model="username" :rules="[rules.required]" label="Username" required></v-text-field>
-            </v-col>
-            <v-col cols="12" md="3">
-                <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" @click:append="show1 = !show1"></v-text-field>
-            </v-col>
-            <v-col cols="12" md="3">
-                <v-text-field v-model="bio" :rules="[rules.required]" label="Bio" required></v-text-field>
-            </v-col>
-            <v-col cols="12" md="3">
-                <v-text-field v-model="birthdate" :rules="[rules.required]" label="Birth Date" required></v-text-field>
-            </v-col>
-            <v-col cols="12" md="3" align="center">
-                <v-btn @click="signUp" elevation="2" outlined> Sign Up</v-btn>
-            </v-col>
-            <v-row>
-                <v-img></v-img>
-            </v-row>
-        </v-container>
-    </v-app>
+    <div id="container">
+        <div>
+            <img src="https://images.unsplash.com/photo-1528290869615-84fe45af6918?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80" alt="">
+        </div>
+        <div id="textField">
+        <v-app>
+            <v-container>
+                <v-col>
+                    <v-text-field class="orange" rounded v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-text-field class="orange" rounded v-model="username" :rules="[rules.required]" label="Username" required></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-text-field class="orange" rounded v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" label="Password" hint="At least 8 characters" @click:append="show1 = !show1"></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-text-field class="orange" rounded v-model="bio" :rules="[rules.required]" label="Bio" required></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-text-field class="orange" rounded v-model="birthdate" :rules="[rules.required]" label="Birth Date" required></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-btn class="orange white--text" rounded @click="signUp" elevation="2" outlined> Sign Up</v-btn>
+                </v-col>
+                <v-col>
+                    <v-img src=""></v-img>
+                </v-col>
+            </v-container>
+        </v-app>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -38,6 +45,8 @@
                 password: "",
                 bio: "",
                 birthdate: "",
+                imgUrl:"",
+                bannerUrl:"",
                 valid: false,
                 emailRules: [
                     v => !!v || 'Required',
@@ -82,5 +91,29 @@
 </script>
 
 <style scoped>
+/* mobile */
+img {
+        display: none;
+    }
+    /* tablet */
+@media only screen and (min-width: 426px) {
+    img {
+        display: none;
+    }
+}
 
+    /* desktop */
+@media only screen and (min-width: 769px) {
+    #container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    }
+    img {
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+}
 </style>

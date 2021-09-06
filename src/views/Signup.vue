@@ -15,5 +15,7 @@ import SignupComp from '../components/SignupComp.vue'
 </script>
 
 <style scoped>
-
+div {
+        background-color: #F19953;
+    }
 </style>

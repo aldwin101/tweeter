@@ -1,3 +1,4 @@
+<!-- This component goes into the UserProfileList.vue in components folder -->
 <template>
     <div>
         <div id="followBtn">

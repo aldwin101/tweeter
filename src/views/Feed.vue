@@ -1,57 +1,67 @@
 <template>
     <div>
         <div id="gridContainer">
+            <div id="sideBtn"><SideButtons  /></div>
+            <div><UserTweet /></div>
             <div>
-                <UserTweet />
-            </div>
-            <div id="sideBtns">
-                <v-container>
-                    <v-row>
-                        <v-col><v-btn @click="discoverPage">Discover</v-btn></v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col><v-btn @click="editProfile">Edit Profile</v-btn></v-col>
-                    </v-row>
-                </v-container>
-            </div>
-            <div>
-                <FollowedUserTweets />
+                <div><UserTweetList /></div>
+                <div><FollowedUserTweets /></div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import UserTweetList from '../components/UserTweetList.vue'
+    import SideButtons from '../components/SideButtons.vue'
     import FollowedUserTweets from '../components/FollowedUserTweets.vue'
     import UserTweet from '../components/UserTweet.vue'
     export default {
         name:'Feed',
         components: {
             UserTweet,
-            FollowedUserTweets
+            FollowedUserTweets,
+            SideButtons,
+            UserTweetList
         },
         methods: {
-            discoverPage(){
-                this.$router.push({name: 'Discover'});
-            },
-
-            editProfile() {
-                this.$router.push({name: 'Profile'});
-            }
         },
     }
 </script>
 
 <style scoped>
-#gridContainer {
-    display: grid;
-    grid-template-columns: fit-content(100%) 1fr;
-    grid-template-rows: fit-content(100%) 1fr;
-}
-#sideBtns {
-    grid-row: 1 / 3;
-    position: relative;
-    top: 50vh;
-    width: 15vw;
+@media only screen and (max-width: 600px) {
+    #gridContainer {
+        display: grid;
+        grid-template-rows: repeat(3, fit-content(100%));
+        justify-items: center;
     }
+}
+
+/*tablet*/
+@media only screen and (min-width: 600px) {
+    #gridContainer {
+        display: grid;
+        grid-template-columns: fit-content(100%) 1fr;
+        grid-template-rows: repeat(2, fit-content(100%));
+    }
+    #sideBtn {
+        grid-row: 1 / 3;
+        background-color: #F19953;
+        z-index: 0;
+    }
+}
+/*desktop*/
+@media only screen and (min-width: 820px) {
+    #gridContainer {
+        display: grid;
+        grid-template-columns: fit-content(100%) 1fr;
+        grid-template-rows: repeat(2, fit-content(100%));
+    }
+    #sideBtn {
+        grid-row: 1 / 3;
+        background-color: #F19953;
+        z-index: 0;
+    }
+}
 </style>

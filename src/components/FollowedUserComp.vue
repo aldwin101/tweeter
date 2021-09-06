@@ -2,19 +2,27 @@
 <template>
     <div>
         <div id="tweetContainer">
-        <div id='userTweets'>
-            <h2>{{username}}</h2>
-            <p>{{created}}</p>
-            <h3>{{tweets}}</h3>
-            <div id="likeCommentContainer">
-                <p @click="likeComment">Like</p>
-                <p @click="unlikeComment">Unlike</p>
-                
-                <UserComments :tweetId="tweetId"/>
-                <CommentList :tweetId="tweetId"/>
+            <div id='userTweetsContainer'>
+                <div id="userTweets">
+                    <div>
+                        <img src="" alt="">
+                        <h2>{{username}}</h2>
+                    </div>
+                    <p>{{created}}</p>
+                    <h3>{{tweets}}</h3>
+                </div>
+                <div id="likeCommentContainer">
+                    <button
+                    @click="likeUnlike"
+                    >{{isClick ? 'Like' : 'Liked'}}</button>
+                </div>
+
+                <div>
+                    <UserComments :tweetId="tweetId"/>
+                    <CommentList :tweetId="tweetId"/>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -24,7 +32,7 @@
     import axios from 'axios'
     import cookies from 'vue-cookies'
     export default {
-        name : 'FollowedUser',
+        name : 'FollowedUserComp',
         props: {
             username: String,
             tweets: String,
@@ -34,7 +42,8 @@
         },
         data() {
             return {
-                getTweetId: this.tweetId
+                getTweetId: this.tweetId,
+                isClick: true
             }
         },
         components: {
@@ -42,44 +51,50 @@
             UserComments
         },
         methods: {
-            likeComment(){
-                axios.request({
-                url:'https://tweeterest.ml/api/tweet-likes',
-                method:'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                'X-Api-Key' : process.env.VUE_APP_API_KEY
-                },
-                data: {
-                    'loginToken': this.token,
-                    'tweetId' : this.getTweetId
-                }
-            }).then((response) => {
-                console.log(response);
-            }).catch((error) => {
-                console.log(error.response);
-            })
-            },
-            
-            unlikeComment() {
-                axios.request({
-                    url: 'https://tweeterest.ml/api/tweet-likes',
-                    method: 'DELETE',
-                    headers: {
+            // like/unlike comment
+            likeUnlike() {
+                if(this.isClick == true){
+                    this.isClick = false;
+                    console.log(this.isClick);
+                    axios.request({
+                        url:'https://tweeterest.ml/api/tweet-likes',
+                        method:'POST',
+                        headers: {
                         'Content-Type': 'application/json',
                         'X-Api-Key' : process.env.VUE_APP_API_KEY
-                    },
-                    data: {
-                        'loginToken': this.token,
-                        'tweetId': this.getTweetId
+                        },
+                        data: {
+                            'loginToken': this.token,
+                            'tweetId' : this.getTweetId
+                        }
+                    }).then((response) => {
+                        console.log(response);
+                    }).catch((error) => {
+                        console.log(error.response);
+                    })
+                }else if(this.isClick == this.isClick) {
+                    console.log('Like');
+                    this.isClick = true
+                    console.log(this.isClick);
+                            axios.request({
+                        url: 'https://tweeterest.ml/api/tweet-likes',
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Api-Key' : process.env.VUE_APP_API_KEY
+                        },
+                        data: {
+                            'loginToken': this.token,
+                            'tweetId': this.getTweetId
+                        }
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch((error) => {
+                        console.log(error.response);
+                    })
                     }
-                }).then((response) => {
-                    console.log(response + ' Unliked');
-                }).catch((error) => {
-                    console.log(error.response);
-                })
-            }
-        },
+                },
+            },
         mounted () {
             this.token = cookies.get('token');
             console.log(this.tweetId);
@@ -93,15 +108,20 @@
     padding: 2vh;
     text-align: center;
 }
+#userTweetsContainer {
+    background-color: rgb(243, 225, 193);
+    display: grid;
+    grid-template-rows: repeat(3, fit-content(100%));
+    border-radius: 20px;
+    white-space: normal;
+    width: 80vw;
+    margin: 0 auto;
+}
+
 #userTweets {
-    background-color: rgb(235, 235, 235);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    border-radius: 20px;
-    white-space: normal;
-    width: 50vw;
-    margin: 0 auto;
 }
 
 h3{
@@ -120,7 +140,7 @@ p {
 
 #likeCommentContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     width: 10vw;
     background-color: rgb(235, 235, 235);
     margin-left: 1vw;

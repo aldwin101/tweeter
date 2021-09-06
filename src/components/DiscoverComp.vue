@@ -1,3 +1,4 @@
+<!-- This component goes into the Discover.vue in view folder -->
 <template>
     <div>
         <h2>{{username}}</h2>
