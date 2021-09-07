@@ -1,15 +1,16 @@
+<!-- This component goes into the FollowedUserComp in components folder -->
 <template>
-    <div>
-        <v-text-field
-            v-model="content"
-            placeholder="Write comment"
-            solo
-            dense
-          ></v-text-field>
-        <v-btn @click="commentTweet">Send</v-btn>
-        <div>
-            
-        </div>
+    <div id="container">
+        <v-app>
+            <v-row>
+                <v-row>
+                    <v-text-field class="orange white--text" rounded v-model="content" placeholder="Write comment"></v-text-field>
+                </v-row>
+                <v-col>
+                    <v-btn class="orange white--text" rounded @click="commentTweet">Comment</v-btn>
+                </v-col>
+            </v-row>
+        </v-app>
     </div>
     
 </template>
@@ -56,5 +57,13 @@
 </script>
 
 <style scoped>
-
+#container {
+    width: 30vw;
+    margin: auto;
+    background-color: rgb(243, 225, 193);
+}
+::v-deep .v-application--wrap {
+            min-height: fit-content;
+            background-color: rgb(243, 225, 193);
+        }
 </style>

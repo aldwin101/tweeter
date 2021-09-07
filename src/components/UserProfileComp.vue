@@ -1,3 +1,4 @@
+<!-- This component goes into the UserProfileList.vue in components folder -->
 <template>
     <div>
         <div>
@@ -25,7 +26,7 @@
 
 <style scoped>
 div {
-    background-color: rgb(255, 255, 255);
+    background-color: #f3e1c1;
     width: 50vw;
     height: 20vh;
     margin: 0 auto;

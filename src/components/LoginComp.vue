@@ -1,3 +1,4 @@
+<!-- This component goes into the Login.vue in view folder -->
 <template>
     <div id="container">
         <v-app>
@@ -27,7 +28,7 @@
             return {
                 email: "",
                 password: "",
-                // button and textfield rules
+                // vuetify button and textfield rules
                 valid: false,
                 emailRules: [
                     v => !!v || 'E-mail is required',
@@ -40,7 +41,7 @@
             }
         },
         methods: {
-            // AXIOS POST method call for log in
+            // log in
             logIn(){
                 axios.request({
                     url: 'https://tweeterest.ml/api/login',
@@ -57,10 +58,8 @@
                     cookies.set('token', response.data.loginToken);
                     cookies.set('userLoggedinId', response.data.userId);
                     this.$router.push({name: 'Feed'});
-                    console.log(response.data.loginToken);
-                    console.log(response.data);
                 }).catch ((error) => {
-                    console.log(error + this.msg);
+                    console.log(error);
                 })
             },
         },

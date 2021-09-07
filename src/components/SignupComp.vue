@@ -1,3 +1,4 @@
+<!-- This component goes into the Signup.vue in view folder -->
 <template>
 <!-- vuetify button and text field -->
     <div id="container">
@@ -23,6 +24,12 @@
                     <v-text-field class="orange" rounded v-model="birthdate" :rules="[rules.required]" label="Birth Date" required></v-text-field>
                 </v-col>
                 <v-col>
+                    <v-text-field class="orange" rounded label="Profile Picture"><img :src="this.profilePic" alt=""></v-text-field>
+                </v-col>
+                <v-col>
+                    <v-text-field class="orange" rounded label="Banner"><img :src="this.bannerPic" alt=""></v-text-field>
+                </v-col>
+                <v-col>
                     <v-btn class="orange white--text" rounded @click="signUp" elevation="2" outlined> Sign Up</v-btn>
                 </v-col>
                 <v-col>
@@ -45,8 +52,8 @@
                 password: "",
                 bio: "",
                 birthdate: "",
-                imgUrl:"",
-                bannerUrl:"",
+                profilePic:"@/assets/defaultProfilePic.png",
+                bannerPic:"",
                 valid: false,
                 emailRules: [
                     v => !!v || 'Required',
@@ -59,7 +66,7 @@
             }
         },
         methods: {
-            //
+            //sign up
             signUp(){
                 axios.request({
                     url: 'https://tweeterest.ml/api/users',
@@ -77,15 +84,12 @@
                     }
                 }).then((response) => {
                     this.$router.push({name: 'Login'});
-                    console.log(response.data);
+                    console.log(response);
 
                 }).catch ((error) => {
                     console.log(error);
             })
             },
-            // apiKeyCall(){
-            //     console.log(process.env.VUE_APP_API_KEY);
-            // }
         }
     }
 </script>

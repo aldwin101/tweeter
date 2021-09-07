@@ -1,13 +1,10 @@
+<!-- This component goes into the TweetList.vue in components folder -->
 <template>
     <div id="tweetContainer">
         <div id='userTweets'>
             <h2>{{username}}</h2>
             <p>{{created}}</p>
             <h3>{{tweets}}</h3>
-            <div id="likeCommentContainer">
-                <p>like</p>
-                <p>comment</p>
-            </div>
         </div>
     </div>
 </template>
@@ -30,7 +27,7 @@
     text-align: center;
 }
 #userTweets {
-    background-color: rgb(235, 235, 235);
+    background-color: #f3e1c1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;

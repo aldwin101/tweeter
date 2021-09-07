@@ -1,3 +1,4 @@
+<!-- This component goes into the UserProfile.vue in view folder -->
 <template>
     <div>
         <!-- for loop to display all the tweets of a specific user -->
@@ -36,9 +37,8 @@
                     }
                 }).then((response) => {
                     this.tweets = response.data.reverse();
-                    console.log(response.data);
                 }).catch((error) => {
-                    console.log(error.response);
+                    console.log(error);
                 })
             }
         }

@@ -1,4 +1,4 @@
-
+<!-- This component goes into the Feed.vue in view folder -->
 <template>
     <div>
         <div id="container">

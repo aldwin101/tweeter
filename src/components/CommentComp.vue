@@ -6,10 +6,9 @@
         <p>{{created}}</p>
         <h3>{{comment}}</h3>
 
-        <div>
-            <button @click="likeComment">like</button>
-            <button @click="unlikeComment">unlike</button>
-            <button @click="deleteComment">delete</button>
+        <div id="commentContainer">
+            <p @click="likeUnlike">{{isClick ? 'Like' : 'Liked'}}</p>
+            <p @click="deleteComment">delete</p>
         </div>
     </div>
 </div>
@@ -28,13 +27,16 @@
         },
         data() {
             return {
-                commentId: this.getCommentId 
+                commentId: this.getCommentId,
+                isClick: true
             }
         },
         methods: {
-                // like comment
-            likeComment() {
-                axios.request({
+                // like/unlike comment
+            likeUnlike() {
+                if(this.isClick == true){
+                    this.isClick = false;
+                    axios.request({
                     url:'https://tweeterest.ml/api/comment-likes',
                     method: 'POST',
                     headers: {
@@ -50,10 +52,10 @@
                 }).catch((error) => {
                     console.log(error);
                 })
-            },
 
-            unlikeComment() {
-                axios.request({
+                }else if(this.isClick == this.isClick) {
+                    this.isClick = true
+                    axios.request({
                     url:'https://tweeterest.ml/api/comment-likes',
                     method: 'DELETE',
                     headers: {
@@ -69,7 +71,9 @@
                 }).catch((error) => {
                     console.log(error);
                 })
-            },
+                    }
+                },
+
                 // delete comment
             deleteComment() {
                 axios.request({
@@ -104,12 +108,24 @@
     grid-template-rows: 1fr 1fr;
     margin: auto;
     row-gap: 2vh;
-    width: 30vw;
+    width: 60vw;
 }
 h3 {
     grid-column: 1 / 3;
 }
 h2 {
     text-align: left;
+    margin-left: 2vw;
+}
+
+p {
+    text-align: right;
+    margin-right: 2vw;
+    cursor: pointer;
+}
+
+#commentContainer {
+    display: grid;
+    grid-template-columns: repeat(3, fit-content(100%));
 }
 </style>

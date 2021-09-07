@@ -2,13 +2,12 @@
 <template>
     <div> 
         <!-- vuetify button -->
-        <v-col>
-            <v-btn @click="deleteProfile">Delete Profile</v-btn>
-        </v-col>
-
-        <div id="confirmPassword">
-            <v-text-field v-model="password" placeholder="Confirm Password" type="password"></v-text-field>
-        </div>
+        <v-app>
+            <v-col>
+                <v-btn class="orange white--text" rounded @click="deleteProfile">Delete Profile</v-btn>
+                <v-text-field class="orange white--text" rounded v-model="password" placeholder="Confirm Password" type="password"></v-text-field>
+            </v-col>
+        </v-app>
     </div>
 </template>
 
@@ -49,7 +48,6 @@
         mounted () {
             // Get token
             this.token = cookies.get('token');
-            console.log(this.token);
         },
         
     }

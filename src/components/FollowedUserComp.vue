@@ -16,7 +16,6 @@
                     @click="likeUnlike"
                     >{{isClick ? 'Like' : 'Liked'}}</button>
                 </div>
-
                 <div>
                     <UserComments :tweetId="tweetId"/>
                     <CommentList :tweetId="tweetId"/>
@@ -27,12 +26,17 @@
 </template>
 
 <script>
-    import CommentList from './CommentList.vue'
-    import UserComments from './UserComments.vue'
     import axios from 'axios'
     import cookies from 'vue-cookies'
+    import CommentList from './CommentList.vue'
+    import UserComments from './UserComments.vue'
+
     export default {
         name : 'FollowedUserComp',
+        components: {
+            CommentList,
+            UserComments
+        },
         props: {
             username: String,
             tweets: String,
@@ -46,16 +50,11 @@
                 isClick: true
             }
         },
-        components: {
-            CommentList,
-            UserComments
-        },
         methods: {
             // like/unlike comment
             likeUnlike() {
                 if(this.isClick == true){
                     this.isClick = false;
-                    console.log(this.isClick);
                     axios.request({
                         url:'https://tweeterest.ml/api/tweet-likes',
                         method:'POST',
@@ -70,12 +69,10 @@
                     }).then((response) => {
                         console.log(response);
                     }).catch((error) => {
-                        console.log(error.response);
+                        console.log(error);
                     })
                 }else if(this.isClick == this.isClick) {
-                    console.log('Like');
                     this.isClick = true
-                    console.log(this.isClick);
                             axios.request({
                         url: 'https://tweeterest.ml/api/tweet-likes',
                         method: 'DELETE',
@@ -97,7 +94,6 @@
             },
         mounted () {
             this.token = cookies.get('token');
-            console.log(this.tweetId);
         }
     }
     
@@ -109,11 +105,10 @@
     text-align: center;
 }
 #userTweetsContainer {
-    background-color: rgb(243, 225, 193);
+    background-color: #f3e1c1;
     display: grid;
     grid-template-rows: repeat(3, fit-content(100%));
     border-radius: 20px;
-    white-space: normal;
     width: 80vw;
     margin: 0 auto;
 }
@@ -142,7 +137,6 @@ p {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 10vw;
-    background-color: rgb(235, 235, 235);
     margin-left: 1vw;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <p>User Profile Page</p>
         <div>
             <UserProfileList />
             <TweetList />

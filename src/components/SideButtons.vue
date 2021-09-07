@@ -1,9 +1,9 @@
-<!-- This component goes into the Feed in view folder -->
 <template>
     <div id="container">
             <img src="@/assets/logo.png" alt="">
             <div id="sideBtnsContainer">
                 <div id="sideBtns">
+                    <p @click="feedPage">Feed</p>
                     <p @click="discoverPage">Discover</p>
                     <p @click="editProfile">Edit Profile</p>
                     <p @click="logOut">Logout</p>
@@ -41,9 +41,8 @@
                     cookies.remove('token');
                     cookies.remove('userLoggedinId')
                     this.$router.push({name: 'LoginSignup'});
-                    console.log('Logout successfully');
                 }).catch((error) => {
-                    console.log(error.response);
+                    console.log(error);
                 })
             },
                 // route to discover page
@@ -53,11 +52,13 @@
                 // route to profile page
             editProfile() {
                 this.$router.push({name: 'Profile'});
-            }
+            },
+            feedPage() {
+                this.$router.push({name: 'Feed'});
+            },
         },
         mounted () {
             this.token = cookies.get('token');
-            console.log(this.token);
         },
     }
 </script>

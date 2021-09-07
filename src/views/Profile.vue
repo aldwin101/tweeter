@@ -1,34 +1,43 @@
 <template>
-  <div>
+  <div id="gridContainer">
+    <div id="sideBtns">
     <SideButtons />
-  <v-container>
-    <v-col>
-      <v-btn @click="closeEditProfile">X</v-btn>
-    </v-col>
-    <v-col cols="12" md="3">
-      <v-text-field v-model="email" label="E-mail"></v-text-field>
-    </v-col>
-    <v-col cols="12" md="3">
-      <v-text-field v-model="username" label="Username"></v-text-field>
-    </v-col>
-    <v-col cols="12" md="3">
-      <v-text-field v-model="bio" label="Bio" ></v-text-field>
-    </v-col>
-    <v-col cols="12" md="3">
-      <v-text-field v-model="birthdate" label="Birth date"></v-text-field>
-    </v-col>
-    <v-col cols="12" md="3">
-      <v-text-field v-model="imageUrl" label="Profile picture" ></v-text-field>
-    </v-col>
-    <v-col cols="12" md="3">
-      <v-text-field v-model="bannerUrl" label="Banner"></v-text-field>
-    </v-col>
+    </div>
+
+    <div id="editProfile">
+      <v-app>
+      <v-container>
+        
+        <v-col>
+          <v-btn class="orange white--text" rounded @click="closeEditProfile">X</v-btn>
+        </v-col>
+        <v-col>
+          <v-text-field class="orange white--text" rounded v-model="email" label="E-mail"></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field class="orange white--text" rounded v-model="username" label="Username"></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field class="orange white--text" rounded v-model="bio" label="Bio" ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field class="orange white--text" rounded v-model="birthdate" label="Birth date"></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field class="orange white--text" rounded v-model="imageUrl" label="Profile picture" ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field class="orange white--text" rounded v-model="bannerUrl" label="Banner"></v-text-field>
+        </v-col>
+        
+          <v-col>
+            <v-btn class="orange white--text" rounded @click="updateProfile">Save profile</v-btn>
+          </v-col>
+          <DeleteProfileComp />
+      </v-container>
+      </v-app>
+    </div>
     
-      <v-col>
-        <v-btn @click="updateProfile">Save profile</v-btn>
-      </v-col>
-  </v-container>
-    <DeleteProfileComp />
   </div>
 </template>
 
@@ -92,5 +101,36 @@ import SideButtons from '../components/SideButtons.vue'
 </script>
 
 <style scoped>
+
+
+/*tablet*/
+@media only screen and (min-width: 426px) {
+  #gridContainer {
+      display: grid;
+      grid-template-columns: fit-content(100%) 1fr;
+    }
+    #sideBtns {
+      background-color:#F19953;
+    }
+    #editProfile {
+      margin: auto;
+      width: 30vw;
+    }
+}
+
+/*desktop*/
+@media only screen and (min-width: 769px) {
+  #gridContainer {
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+  }
+  #sideBtns {
+    background-color:#F19953;
+  }
+  #editProfile {
+    margin: auto;
+    width: 30vw;
+  }
+}
 
 </style>

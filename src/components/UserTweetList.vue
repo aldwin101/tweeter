@@ -1,10 +1,12 @@
+<!-- This component goes into the Feed.vue in view folder -->
 <template>
     <div>
         <UserTweetListComp v-for="tweet in tweets" :key="tweet.tweetId"
         :imgUrl='tweet.userImageUrl'
         :username='tweet.username'
         :created='tweet.createdAt'
-        :tweets='tweet.content' />
+        :tweets='tweet.content' 
+        :tweetId="tweet.tweetId" />
     </div>
 </template>
 

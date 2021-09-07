@@ -1,10 +1,11 @@
 <!-- This component goes into the UserProfileList.vue in components folder -->
 <template>
     <div>
+        <v-app>
         <div id="followBtn">
-            <v-btn @click="followUser">Follow</v-btn>
-            <v-btn @click="unfollowUser">Unfollow</v-btn>
+            <v-btn class="orange white--text" rounded @click="followUnfollow">{{isClick ? 'Follow' : 'Unfollow'}}</v-btn>
         </div>
+        </v-app>
     </div>
 </template>
 
@@ -19,13 +20,16 @@
         },
         data() {
             return {
-                followId: this.userId
+                followId: this.userId,
+                isClick: true
             }
         },
         methods: {
             // follow user
-            followUser() {
-                axios.request({
+            followUnfollow() {
+                if(this.isClick == true){
+                    this.isClick = false;
+                    axios.request({
                     url: 'https://tweeterest.ml/api/follows',
                     method: 'POST',
                     headers: {
@@ -37,13 +41,13 @@
                         'followId': this.followId
                     }
                 }).then((response) => {
-                    console.log(response + ' Followed');
+                    console.log(response);
                 }).catch((error) => {
-                    console.log(error.response);
+                    console.log(error);
                 })
-            },
-            unfollowUser() {
-                axios.request({
+            }else if(this.isClick == this.isClick) {
+                    this.isClick = true;
+                    axios.request({
                     url: 'https://tweeterest.ml/api/follows',
                     method: 'DELETE',
                     headers: {
@@ -55,17 +59,17 @@
                         'followId': this.followId
                     }
                 }).then((response) => {
-                    console.log(response + ' Unfollowed');
+                    console.log(response);
                 }).catch((error) => {
                     console.log(error.response);
                 })
             }
-        },
-        mounted () {
-            this.token = cookies.get('token');
-            console.log(this.userId);
         }
+    },
+    mounted () {
+        this.token = cookies.get('token');
     }
+}
 </script>
 
 <style scoped>
@@ -74,4 +78,7 @@
         margin-right: 25vw;
         padding: 20px;
     }
+::v-deep .v-application--wrap {
+            min-height: fit-content;
+        }
 </style>

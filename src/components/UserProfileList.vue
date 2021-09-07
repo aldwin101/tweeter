@@ -1,7 +1,6 @@
 <!-- This component goes into the UserProfile in view folder -->
 <template>
     <div>
-        <!-- used v-for to display all the tweets of a specific user-->
         <UserProfileComp v-for="profile in userProfiles" :key="profile.userId" 
         :imageUrl="profile.imageUrl"
         :username="profile.username"

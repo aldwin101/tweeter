@@ -39,10 +39,8 @@
                 }
             }).then((response) => {
                 let followedUsers = response.data;
-                console.log(response);
                 for (let i = 0; i < followedUsers.length; i++){
                     let followedId = followedUsers[i].userId
-                    console.log(followedId);
                     // Getting all the tweets of users the userId follows
                     axios.request({
                         url: 'https://tweeterest.ml/api/tweets',
@@ -57,7 +55,6 @@
                     }).then((response) => {
                         // joining multiple arrays
                         this.tweets = this.tweets.concat(response.data.reverse());
-                        console.log(response.data);
                     }).catch((error) => {
                         console.log(error.response);
                     })
